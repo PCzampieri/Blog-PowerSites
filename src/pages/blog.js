@@ -5,7 +5,9 @@ import Seo from "../components/Seo";
 
 const QUERY = graphql`
   query {
-    posts: allMarkdownRemark {
+    posts: allMarkdownRemark(
+      filter: { fields: { collection: { eq: "pages" } } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -25,9 +27,9 @@ const Blog = () => {
     <>
       <Seo title="Blog" />
       <h1>Blog</h1>
-      {posts.edges.map(post => {
+      {posts.edges.map((post, index) => {
         return (
-          <div>
+          <div key={index}>
             <h3>
               <Link to={post.node.frontmatter.path}>
                 {post.node.frontmatter.title}
