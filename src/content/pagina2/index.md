@@ -1,7 +1,7 @@
 ---
-path: "/blog/pagina2"
-title: "Página 2"
-description: "Bem vindo a pagina 2"
+title: Página 2
+description: Bem vindo a pagina 2
+banner: postbird-icon-128.png
 ---
 
 # Página 2
