@@ -64,6 +64,24 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
+  const templateBlog = path.resolve("src/templates/blog.js");
+  const pageSize = 2;
+  const totalPosts = posts.data.posts.edges.length;
+  const numPages = Math.ceil(totalPosts / pageSize);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: "/blog" + (i === 0 ? "" : "/" + i),
+
+      component: templateBlog,
+      context: {
+        limit: pageSize,
+        skip: i * pageSize,
+        numPages,
+        currentPage: i
+      }
+    });
+  });
+
   const templateAuthor = path.resolve("src/templates/author.js");
   posts.data.authors.edges.forEach(author => {
     createPage({
